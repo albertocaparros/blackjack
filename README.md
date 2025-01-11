@@ -8,8 +8,8 @@ This project is a web-based Blackjack game built using the Deck of Cards API. It
 
 ### 1. Game Setup
 
-- [ ] **As a player, I want to see a shuffled deck of cards** so that I can start the game with a randomized setup.
-- [ ] **As a player, I want the game to deal cards to the player and dealer automatically at the beginning of a round** so that I can start playing immediately.
+- [x] **As a player, I want to see a shuffled deck of cards** so that I can start the game with a randomized setup.
+- [x] **As a player, I want the game to deal cards to the player and dealer automatically at the beginning of a round** so that I can start playing immediately.
 
 ---
 

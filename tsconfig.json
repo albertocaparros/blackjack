@@ -9,7 +9,7 @@
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "skipLibCheck": true,
+    "skipLibCheck": false,
     "isolatedModules": true,
     "esModuleInterop": true,
     "sourceMap": true,
@@ -26,5 +26,7 @@
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  }
+  },
+  "include": ["src/**/*.ts", "**/*.spec.ts", "cypress.config.ts"],
+  "exclude": ["src/**/*.cy.ts", "cypress/**/*"]
 }

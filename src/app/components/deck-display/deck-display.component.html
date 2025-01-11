@@ -1,0 +1,9 @@
+<div>
+  <h2>Shuffled Deck</h2>
+  @if (deck) {
+    <p>Deck ID: {{ deck.deck_id }}</p>
+    <p>Remaining Cards: {{ deck.remaining }}</p>
+  } @else {
+    <p>Loading...</p>
+  }
+</div>

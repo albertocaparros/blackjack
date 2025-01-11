@@ -1,0 +1,24 @@
+<div>
+  <h2>Game Round</h2>
+  @if (playerCards.length && dealerCards.length) {
+    <p>Game has started!</p>
+  } @else {
+    <p>Dealing cards...</p>
+  }
+  <div>
+    <h3>Player's Cards</h3>
+    <ul>
+      @for (card of playerCards; track card) {
+        <li>{{ card }}</li>
+      }
+    </ul>
+  </div>
+  <div>
+    <h3>Dealer's Cards</h3>
+    <ul>
+      @for (card of dealerCards; track card) {
+        <li>{{ card }}</li>
+      }
+    </ul>
+  </div>
+</div>
