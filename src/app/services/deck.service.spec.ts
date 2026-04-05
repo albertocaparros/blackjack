@@ -68,4 +68,22 @@ describe('DeckService', () => {
     expect(req.request.method).toBe('GET')
     req.flush(mockResponse)
   })
+
+  it('should surface HTTP errors when shuffle request fails', (done) => {
+    service.getShuffledDeck().subscribe({
+      next: () => done.fail('expected an error'),
+      error: (err) => {
+        expect(err.status).toBe(503)
+        done()
+      },
+    })
+
+    const req = httpMock.expectOne(
+      'https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1'
+    )
+    req.flush('Service unavailable', {
+      status: 503,
+      statusText: 'Service Unavailable',
+    })
+  })
 })

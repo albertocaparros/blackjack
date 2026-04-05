@@ -1,46 +1,42 @@
-# Blackjack Game Project
+# Blackjack (Deck of Cards API)
 
-## Overview
+Angular **18** demo that integrates the public [Deck of Cards API](https://deckofcardsapi.com/): fetch a shuffled deck, show deck metadata, and deal an opening hand to the player and dealer.
 
-This project is a web-based Blackjack game built using the Deck of Cards API. It is designed to showcase frontend development skills, focusing on UI/UX, state management, and API integration.
+## Current scope (MVP)
 
-## Features and User Stories
+This repository is intentionally scoped as a **portfolio slice** — not a full casino game.
 
-### 1. Game Setup
+| Done | Description |
+|------|-------------|
+| Yes | Fetch and display a shuffled deck (ID, remaining count) |
+| Yes | Draw four cards and show two per side (player / dealer) in the first round |
+| Yes | **Standalone** components, **control flow** syntax in templates, **Jest** unit tests, **Cypress** E2E (including a **mocked API** path for reliable CI) |
+| No | Hit / Stand, dealer rules to 17, win/loss outcome, betting, animations |
 
-- [x] **As a player, I want to see a shuffled deck of cards** so that I can start the game with a randomized setup.
-- [x] **As a player, I want the game to deal cards to the player and dealer automatically at the beginning of a round** so that I can start playing immediately.
+Roadmap items (hit, stand, scoring, UX polish) are **future work** if this project is extended.
 
----
+## Stack
 
-### 2. Player Gameplay
+- Angular 18, RxJS, Angular Material + CDK (versions aligned with Angular **18.2**)
+- Jest + `@testing-library/angular` for unit tests
+- Cypress for E2E (`npm run e2e` runs headless; `npm run cypress:open` for interactive)
+- ESLint, Prettier, Husky
 
-- [ ] **As a player, I want to see my hand of cards with their values clearly displayed** so that I can make strategic decisions.
-- [ ] **As a player, I want to click a "Hit" button to draw a card** and update my hand's total value.
-- [ ] **As a player, I want to click a "Stand" button to stop drawing cards** and let the dealer play their turn.
+## Scripts
 
----
+```bash
+npm ci
+npm start          # dev server → http://localhost:4200
+npm test           # Jest
+npm run lint
+npm run build
+npm run e2e        # Cypress (ensure dev server is not already bound to :4200, or use CI)
+```
 
-### 3. Dealer Gameplay
+## CI
 
-- [ ] **As the dealer, I want to draw cards automatically until my hand's total value reaches at least 17** so that I follow the rules of Blackjack.
-- [ ] **As the dealer, I want my cards to be displayed face-down initially and flipped when my turn starts** so that the player experiences suspense.
+GitHub Actions runs **lint**, **Jest**, **production build**, and **Cypress** against `ng serve` so the critical shuffle + deal flow stays green without depending on the external API at test time.
 
----
+## License
 
-### 4. Game Logic and Outcome
-
-- [ ] **As a player, I want to see if I’ve won, lost, or drawn at the end of a round** so that I know the result of my gameplay.
-- [ ] **As a player, I want to see a breakdown of how the game result was determined** (e.g., total values of hands) so that I can understand why I won or lost.
-
----
-
-### 5. Enhanced Features
-
-- **Betting System**
-  - [ ] **As a player, I want to place bets before each round** so that I can simulate real Blackjack gameplay.
-- **Multiple Rounds**
-  - [ ] **As a player, I want to play multiple rounds without refreshing the page** so that I can have a continuous gaming experience.
-- **Animations and Sound Effects**
-  - [ ] **As a player, I want smooth animations for card dealing and flipping** so that the game feels engaging.
-  - [ ] **As a player, I want sound effects for actions like drawing cards or winning** to enhance the experience.
+Private / portfolio.

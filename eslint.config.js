@@ -6,9 +6,26 @@ const angularTemplateParser = require('@angular-eslint/template-parser')
 const angularTemplatePlugin = require('@angular-eslint/eslint-plugin-template')
 const prettierPlugin = require('eslint-plugin-prettier')
 
+const prettierOptions = {
+  singleQuote: true,
+  semi: false,
+  printWidth: 80,
+  tabWidth: 2,
+  trailingComma: 'es5',
+  endOfLine: 'auto',
+}
+
 module.exports = [
   {
-    files: ['**/*.ts'],
+    ignores: [
+      'node_modules/**',
+      'dist/**',
+      'coverage/**',
+      '.angular/**',
+    ],
+  },
+  {
+    files: ['src/**/*.ts', 'cypress.config.ts'],
     languageOptions: {
       parser: tsParser,
       parserOptions: {
@@ -23,17 +40,7 @@ module.exports = [
     rules: {
       ...tsEslintPlugin.configs.recommended.rules,
       ...angularEslintPlugin.configs.recommended.rules,
-      'prettier/prettier': [
-        'error',
-        {
-          singleQuote: true,
-          semi: false,
-          printWidth: 80,
-          tabWidth: 2,
-          trailingComma: 'es5',
-          endOfLine: 'lf',
-        },
-      ],
+      'prettier/prettier': ['error', prettierOptions],
       '@angular-eslint/directive-selector': [
         'error',
         {
@@ -50,6 +57,23 @@ module.exports = [
           style: 'kebab-case',
         },
       ],
+    },
+  },
+  {
+    files: ['cypress/**/*.ts'],
+    languageOptions: {
+      parser: tsParser,
+      parserOptions: {
+        project: false,
+      },
+    },
+    plugins: {
+      '@typescript-eslint': tsEslintPlugin,
+      prettier: prettierPlugin,
+    },
+    rules: {
+      ...tsEslintPlugin.configs.recommended.rules,
+      'prettier/prettier': ['error', prettierOptions],
     },
   },
   {

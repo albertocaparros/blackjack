@@ -9,17 +9,18 @@ on:
       - main
 
 jobs:
-  lint-test-build:
+  lint-test-build-e2e:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '18'
+          cache: npm
 
       - name: Install dependencies
         run: npm ci
@@ -27,8 +28,17 @@ jobs:
       - name: Lint code
         run: npm run lint
 
-      - name: Run tests
+      - name: Run unit tests
         run: npm test
 
-      - name: Build application
-        run: npm run build --if-present
+      - name: Production build
+        run: npm run build
+
+      - name: Cypress E2E
+        uses: cypress-io/github-action@v6
+        with:
+          install: false
+          start: npm start
+          wait-on: 'http://localhost:4200'
+          wait-on-timeout: 180000
+          browser: chrome
